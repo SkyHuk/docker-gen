@@ -14,6 +14,9 @@ WORKDIR /build
 COPY . .
 RUN go mod download
 
+# fix CVE-2025-22869
+RUN go get -u golang.org/x/crypto
+
 # Build the docker-gen executable
 RUN set -eux; \
 	case "$GOARCH" in \
